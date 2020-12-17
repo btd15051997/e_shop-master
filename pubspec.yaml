@@ -18,11 +18,17 @@ dependencies:
   image_picker: ^0.6.3+1
   firebase_storage: ^3.1.1
   flutter_staggered_grid_view: ^0.3.0
+  firebase_messaging: ^5.1.4
   provider: ^4.0.4
   rxdart: ^0.24.1
   flutter_bloc: ^4.0.0
   path_provider: ^0.5.0+1
   image: ^2.0.7
+  http: ^0.12.2
+  permission_handler: ^3.1.0
+  flutter_local_notifications: ^3.0.2
+  easy_localization: ^2.3.3
+  get: ^3.4.6
   intl:
 
 
@@ -43,6 +49,8 @@ flutter:
     - images/login.png
     - images/admin.png
     - images/cash.png
+    - resource/langs/en-EN.json
+    - resource/langs/vi-VN.json
 
 
 

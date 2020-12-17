@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_shop/Counters/itemQuantity.dart';
 import 'package:e_shop/Store/authen_store_sidebar.dart';
+import 'package:e_shop/push_notifications.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,7 @@ import 'Store/storehome.dart';
 import 'Store/storehome.dart';
 import 'Widgets/loadingWidget.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -25,7 +28,17 @@ Future<void> main() async {
   EcommerceApp.sharedPreferences = await SharedPreferences.getInstance();
   EcommerceApp.firestore = Firestore.instance;
 
-  runApp(MyApp());
+  runApp(
+     EasyLocalization(
+       child: MyApp(),
+       saveLocale: true,
+       path: "resource/langs",
+       supportedLocales: [
+         Locale('vi','VN'),
+         Locale('en','EN'),
+       ],
+     )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -41,6 +54,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'e-Shop',
           debugShowCheckedModeBanner: false,
+          /*Locale for multiples language*/
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+
           theme: ThemeData(
             primaryColor: Colors.green,
           ),
@@ -48,7 +66,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -59,7 +76,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    displaySplash();
+
+   displaySplash();
+
   }
 
   displaySplash() {
@@ -67,12 +86,15 @@ class _SplashScreenState extends State<SplashScreen> {
       if (await EcommerceApp.auth.currentUser() != null) {
         Route route =
             MaterialPageRoute(builder: (_) => AuthenStoreAndSideBarLayout());
+           // MaterialPageRoute(builder: (_) => PushNotificationsService());
         Navigator.pushReplacement(context, route);
       } else {
         Route route = MaterialPageRoute(builder: (_) => AuthenticScreen());
+     // Route route = MaterialPageRoute(builder: (_) => PushNotificationsService());
         Navigator.pushReplacement(context, route);
       }
-    });
+    }
+    );
   }
 
   @override
