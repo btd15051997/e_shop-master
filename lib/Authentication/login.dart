@@ -109,14 +109,35 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-            SizedBox(height: 25.0,),
+            Align(
+              alignment: Alignment.centerRight,
+              child: FlatButton.icon(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AdminSignInPage())),
+                icon: (Icon(
+                  Icons.people_alt_rounded,
+                  color: Colors.green,
+                )),
+                label: Text(
+                  "Login with Admin",
+                      style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 16.0,
+                      letterSpacing: 2.0,
+                      fontFamily: EcommerceApp.setFontFamily,
+                      color: Colors.green,),
+                ),
+              ),
+            ),
+            SizedBox(height: 15.0,),
             ButtonTheme(
               height: 50.0,
-              minWidth: _screenWidth * 0.4,
+              minWidth: _screenWidth * 0.6,
               child: RaisedButton(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    side: BorderSide(color: Colors.greenAccent)),
+                    borderRadius: BorderRadius.circular(20.0),
+                    /*side: BorderSide(color: Colors.greenAccent)*/
+                ),
                 onPressed: () {
                   _emailTextEdittingController.text.isNotEmpty &&
                           _passwordTextEdittingController.text.isNotEmpty
@@ -139,23 +160,6 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 15.0,
             ),
-            FlatButton.icon(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AdminSignInPage())),
-              icon: (Icon(
-                Icons.people_alt_rounded,
-                color: Colors.green,
-              )),
-              label: Text(
-                "Login with Admin",
-                style: TextStyle(
-                    fontSize: 20.0,
-                    letterSpacing: 3.0,
-                    fontFamily: EcommerceApp.setFontFamily,
-                    color: Colors.redAccent,
-                    fontWeight: FontWeight.bold),
-              ),
-            )
           ],
         ),
       ),

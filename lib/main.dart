@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_shop/Counters/itemQuantity.dart';
 import 'package:e_shop/Store/authen_store_sidebar.dart';
-import 'package:e_shop/push_notifications.dart';
+import 'Notifications/local_notification_widget.dart';
+import 'file:///E:/FlutterProject/Tutorial_Flutter_New/Provider_State/e_shop-master/lib/Notifications/push_notifications.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ import 'Counters/totalMoney.dart';
 import 'Store/storehome.dart';
 import 'Store/storehome.dart';
 import 'Widgets/loadingWidget.dart';
+import 'Widgets/widget_controll.dart';
 
 
 Future<void> main() async {
@@ -84,13 +86,12 @@ class _SplashScreenState extends State<SplashScreen> {
   displaySplash() {
     Timer(Duration(seconds: 3), () async {
       if (await EcommerceApp.auth.currentUser() != null) {
-        Route route =
-            MaterialPageRoute(builder: (_) => AuthenStoreAndSideBarLayout());
-           // MaterialPageRoute(builder: (_) => PushNotificationsService());
+        Route route = MaterialPageRoute(builder: (_) => AuthenStoreAndSideBarLayout());
+          // MaterialPageRoute(builder: (_) => LocalNotificationWidget());
         Navigator.pushReplacement(context, route);
       } else {
         Route route = MaterialPageRoute(builder: (_) => AuthenticScreen());
-     // Route route = MaterialPageRoute(builder: (_) => PushNotificationsService());
+     // Route route = MaterialPageRoute(builder: (_) => LocalNotificationWidget());
         Navigator.pushReplacement(context, route);
       }
     }
@@ -102,13 +103,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Material(
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.pinkAccent, Colors.lightBlueAccent],
-            begin: const FractionalOffset(0.0, 0.0),
-            end: const FractionalOffset(1.0, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          ),
+            gradient: buildLinearGradient()
         ),
         child: Center(
           child: Column(

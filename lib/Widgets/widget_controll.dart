@@ -14,7 +14,7 @@ TextStyle simpleTextStyle (){
 
 LinearGradient buildLinearGradient() {
   return new LinearGradient(
-    colors: [Colors.pink, Colors.lightBlueAccent],
+    colors: [Colors.green, Colors.lightBlueAccent],
     begin: const FractionalOffset(0.0, 0.0),
     end: const FractionalOffset(1.0, 0.0),
     stops: [0.0, 1.0],

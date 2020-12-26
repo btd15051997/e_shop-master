@@ -19,13 +19,11 @@ class _PushNotificationsService extends State<PushNotificationsService> {
 
   final FirebaseMessaging _fcm = FirebaseMessaging();
   final List<MessageModel> messageModel = [];
-
   final PermissionHandler _permissionHandler = PermissionHandler();
 
   localPermissionNotifications() {
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-
 
     const AndroidInitializationSettings initializationSettingsAndroid =
     AndroidInitializationSettings('app_icon');
@@ -35,7 +33,9 @@ class _PushNotificationsService extends State<PushNotificationsService> {
         requestBadgePermission: true,
         requestAlertPermission: true,
         onDidReceiveLocalNotification: (int id, String title, String body,
-            String payload) {});
+            String payload) {
+
+        });
     final MacOSInitializationSettings initializationSettingsMacOS =
     MacOSInitializationSettings(
         requestAlertPermission: false,

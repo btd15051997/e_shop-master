@@ -54,6 +54,7 @@ class _UploadPageState extends State<UploadPage>
     final itemsRef = Firestore.instance.collection("items");
     itemsRef.document(productId).setData({
       "shortInfo" : _shortTextEditingController.text.trim(),
+      "idSearchshortInfo" : _shortTextEditingController.text.trim().toLowerCase(),
       "longDescription" : _descriptionTextEditingController.text.trim(),
       "price" : int.parse(_priceTextEditingController.text.trim()),
       "publishedDate" : DateTime.now(),

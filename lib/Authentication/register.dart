@@ -212,11 +212,12 @@ class _RegisterState extends State<Register> {
             ),
             ButtonTheme(
               height: 50.0,
-              minWidth: _screenWidth * 0.4,
+              minWidth: _screenWidth * 0.6,
               child: RaisedButton(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    side: BorderSide(color: Colors.greenAccent)),
+                  borderRadius: BorderRadius.circular(20.0),
+                  /*side: BorderSide(color: Colors.greenAccent)*/
+                ),
                 onPressed: () {
                   _upLoadAndSaveImage();
                 },
@@ -229,14 +230,6 @@ class _RegisterState extends State<Register> {
             ),
             SizedBox(
               height: 30.0,
-            ),
-            Container(
-              height: 2.0,
-              width: _screenWidth * 0.8,
-              color: Colors.pink,
-            ),
-            SizedBox(
-              height: 10.0,
             ),
           ],
         ),

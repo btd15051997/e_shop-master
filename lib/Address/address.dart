@@ -46,37 +46,37 @@ class _AddressState extends State<Address> {
             Consumer<AddressChanger>(
               builder: (context, address, c) {
                 return Flexible(
-                    child: StreamBuilder<QuerySnapshot>(
-                  stream: EcommerceApp.firestore
-                      .collection(EcommerceApp.collectionUser)
-                      .document(EcommerceApp.sharedPreferences
-                          .getString(EcommerceApp.userUID))
-                      .collection(EcommerceApp.subCollectionAddress)
-                      .snapshots(),
-                        builder: (context, snapshot) {
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: EcommerceApp.firestore
+                        .collection(EcommerceApp.collectionUser)
+                        .document(EcommerceApp.sharedPreferences
+                            .getString(EcommerceApp.userUID))
+                        .collection(EcommerceApp.subCollectionAddress)
+                        .snapshots(),
+                    builder: (context, snapshot) {
                       return !snapshot.hasData
-                         ? Center(
-                             child: circularProgress(),
-                           )
-                         : snapshot.data.documents.length == 0
-                            ? noAddressCard()
-                            : ListView.builder(
-                                itemBuilder: (context, index) {
-                                  return AddressCard(
-                                    currentIndex: address.count,
-                                    value: index,
-                                    addressId: snapshot
-                                        .data.documents[index].documentID,
-                                    totalAmount: widget.totalAmount,
-                                    model: AddressModel.fromJson(
-                                        snapshot.data.documents[index].data),
-                                  );
-                                },
-                                itemCount: snapshot.data.documents.length,
-                                shrinkWrap: true,
-                              );
-                  },
-                ),
+                          ? Center(
+                              child: circularProgress(),
+                            )
+                          : snapshot.data.documents.length == 0
+                              ? noAddressCard()
+                              : ListView.builder(
+                                  itemBuilder: (context, index) {
+                                    return AddressCard(
+                                      currentIndex: address.count,
+                                      value: index,
+                                      addressId: snapshot
+                                          .data.documents[index].documentID,
+                                      totalAmount: widget.totalAmount,
+                                      model: AddressModel.fromJson(
+                                          snapshot.data.documents[index].data),
+                                    );
+                                  },
+                                  itemCount: snapshot.data.documents.length,
+                                  shrinkWrap: true,
+                                );
+                    },
+                  ),
                 );
               },
             ),
@@ -97,18 +97,24 @@ class _AddressState extends State<Address> {
 
   noAddressCard() {
     return Card(
-      color: Colors.pink.withOpacity(0.5),
+      color: Colors.pink.withOpacity(0.2),
       child: Container(
         height: 100.0,
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Icon(Icons.add_location, color: Colors.white),
-            Text("No shipment address has been saved."),
             Text(
-                "Please add your shipment Address so that we can deliver product."),
+              "No shipment address has been saved.\n"
+              "Please add your shipment Address so that we can deliver product.",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontFamily: EcommerceApp.setFontFamily,
+                  letterSpacing: 3.0,
+                  fontStyle: FontStyle.italic),
+            ),
           ],
         ),
       ),
@@ -136,8 +142,11 @@ class AddressCard extends StatefulWidget {
   _AddressCardState createState() => _AddressCardState();
 }
 
-TextStyle textStyle (){
-  return TextStyle(letterSpacing: 1.5,fontSize: 18.0,fontFamily: EcommerceApp.setFontFamily);
+TextStyle textStyle() {
+  return TextStyle(
+      letterSpacing: 1.5,
+      fontSize: 18.0,
+      fontFamily: EcommerceApp.setFontFamily);
 }
 
 class _AddressCardState extends State<AddressCard> {
@@ -158,15 +167,12 @@ class _AddressCardState extends State<AddressCard> {
             Row(
               children: [
                 Radio(
-
                   groupValue: widget.currentIndex,
                   value: widget.value,
                   activeColor: Colors.redAccent,
                   onChanged: (val) {
-
                     Provider.of<AddressChanger>(context, listen: false)
                         .displayResult(val);
-
                   },
                 ),
                 Column(
@@ -181,37 +187,37 @@ class _AddressCardState extends State<AddressCard> {
                             KeyText(
                               msg: "Name: ",
                             ),
-                            Text(widget.model.name,style: textStyle()),
+                            Text(widget.model.name, style: textStyle()),
                           ]),
                           TableRow(children: [
                             KeyText(
                               msg: "Phone Number: ",
                             ),
-                            Text(widget.model.phoneNumber,style: textStyle()),
+                            Text(widget.model.phoneNumber, style: textStyle()),
                           ]),
                           TableRow(children: [
                             KeyText(
                               msg: "Flat Number: ",
                             ),
-                            Text(widget.model.flatNumber,style: textStyle()),
+                            Text(widget.model.flatNumber, style: textStyle()),
                           ]),
                           TableRow(children: [
                             KeyText(
                               msg: "City: ",
                             ),
-                            Text(widget.model.city,style: textStyle()),
+                            Text(widget.model.city, style: textStyle()),
                           ]),
                           TableRow(children: [
                             KeyText(
                               msg: "State: ",
                             ),
-                            Text(widget.model.state,style: textStyle()),
+                            Text(widget.model.state, style: textStyle()),
                           ]),
                           TableRow(children: [
                             KeyText(
                               msg: "Pin Code: ",
                             ),
-                            Text(widget.model.pincode,style: textStyle()),
+                            Text(widget.model.pincode, style: textStyle()),
                           ]),
                         ],
                       ),

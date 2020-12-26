@@ -22,14 +22,16 @@ class StoreHome extends StatefulWidget with NavigationStates {
 }
 
 class _StoreHomeState extends State<StoreHome> {
-  _buildLinearGradient() {
-    return new LinearGradient(
-      colors: [Colors.pinkAccent, Colors.lightBlueAccent],
-      begin: const FractionalOffset(0.0, 0.0),
-      end: const FractionalOffset(1.0, 0.0),
-      stops: [0.0, 1.0],
-      tileMode: TileMode.repeated,
-    );
+  bool _hasNext = true;
+  int documentLimit = 15;
+  bool _isFetchingUser = false;
+
+  Stream<QuerySnapshot> _getListItem() {
+    return Firestore.instance
+        .collection("items")
+        .limit(documentLimit)
+        .orderBy("publishedDate", descending: true)
+        .snapshots();
   }
 
   @override
@@ -101,15 +103,11 @@ class _StoreHomeState extends State<StoreHome> {
       body: CustomScrollView(
         slivers: [
           SliverPersistentHeader(
-            pinned: true,
+            /*pinned: true,*/
             delegate: SearchBoxDelegate(),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance
-                .collection("items")
-                .limit(15)
-                .orderBy("publishedDate", descending: true)
-                .snapshots(),
+            stream: _getListItem(),
             builder: (context, dataSnapshot) {
               return !dataSnapshot.hasData
                   ? SliverToBoxAdapter(

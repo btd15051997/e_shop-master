@@ -119,16 +119,34 @@ class _AdminSignInScreenState extends State<AdminSignInScreen> {
                   ],
                 ),
               ),
+              FlatButton.icon(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AuthenticScreen())),
+                icon: (Icon(
+                  Icons.people_alt_rounded,
+                  color: Colors.green,
+                )),
+                label: Text(
+                  "I'am not Admin",
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      letterSpacing: 2.0,
+                      fontFamily: EcommerceApp.setFontFamily,
+                      color: Colors.green,
+                      fontStyle: FontStyle.italic),
+                ),
+              ),
               SizedBox(
-                height: 25.0,
+                height: 15.0,
               ),
               ButtonTheme(
                 height: 50.0,
-                minWidth: _screenWidth * 0.4,
+                minWidth: _screenWidth * 0.6,
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      side: BorderSide(color: Colors.greenAccent)),
+                    borderRadius: BorderRadius.circular(20.0),
+                    /*side: BorderSide(color: Colors.greenAccent)*/
+                  ),
                   onPressed: () {
                     _emailIDTextEdittingController.text.isNotEmpty &&
                             _passwordTextEdittingController.text.isNotEmpty
@@ -151,23 +169,7 @@ class _AdminSignInScreenState extends State<AdminSignInScreen> {
               SizedBox(
                 height: 10.0,
               ),
-              FlatButton.icon(
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AuthenticScreen())),
-                icon: (Icon(
-                  Icons.people_alt_rounded,
-                  color: Colors.pink,
-                )),
-                label: Text(
-                  "I'am not Admin",
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      letterSpacing: 3.0,
-                      fontFamily: EcommerceApp.setFontFamily,
-                      color: Colors.redAccent,
-                      fontWeight: FontWeight.bold),
-                ),
-              )
+
             ],
           ),
         ),
